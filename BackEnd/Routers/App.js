@@ -28,7 +28,7 @@ router.post("/createNewCategory", async (req, res) => {
               res.status(500).json({ message: "Something went wrong" });
        }
 });
-
+//for answer the question
 router.post("/answerQuestion", async (req, res) => {
        try {
               await faq.updateOne({ _id: req.body.id }, { ans: req.body.answer }).exec();
@@ -38,7 +38,7 @@ router.post("/answerQuestion", async (req, res) => {
        }
 
 });
-
+//for add new question 
 router.post("/addQuestion", [middleware.Authenticate], async (req, res) => {
        try {
               // console.log(req.body);
@@ -59,7 +59,7 @@ router.post("/addQuestion", [middleware.Authenticate], async (req, res) => {
               res.status(500).json({ message: "Something went wrong" });
        }
 })
-
+//fetch all category question
 router.get("/getCategoryQuestion", middleware.Authenticate, async (req, res) => {
        try {
               let { id } = req.query;
@@ -71,6 +71,8 @@ router.get("/getCategoryQuestion", middleware.Authenticate, async (req, res) => 
        }
 });
 
+
+//deleting category
 router.delete("/deleteCategory", middleware.Authenticate, async (req, res) => {
        try {
               await faq.deleteMany({ cat_id: mongoose.Types.ObjectId(req.query.id) }).exec();
@@ -80,7 +82,7 @@ router.delete("/deleteCategory", middleware.Authenticate, async (req, res) => {
               res.status(500).json({ message: "Something is wrong" });
        }
 })
-
+//fetch all categoy
 router.get("/getAllCategory", middleware.Authenticate, async (req, res) => {
        try {
               let categories = await category.find({}).exec();
